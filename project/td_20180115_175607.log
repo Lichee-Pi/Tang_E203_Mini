@@ -1,0 +1,46 @@
+============================================================
+   Tang Dynasty, V4.0.972
+   Copyright:   Shanghai Anlogic Infotech Co., Ltd.
+                2011 - 2021
+   Executable = D:/TD/TD_new/bin/td.exe
+   Built at =   11:31:39 Jan  8 2018
+   Run by =     DELL
+   Run Date =   Mon Jan 15 17:56:07 2018
+
+   Run on =     DELL-PC
+============================================================
+CMD-004 : start command "import_device eagle_20.db -package BGA256X -basic"
+CMD-004 : start command "read_verilog -file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram.v"
+VLG-002 : analyze verilog file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram.v
+VLG-004 : elaborate module bram in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram.v(14)
+VLG-004 : elaborate module EG_LOGIC_BRAM(DATA_WIDTH_A=64,DATA_WIDTH_B=64,ADDR_WIDTH_A=13,ADDR_WIDTH_B=13,DATA_DEPTH_A=8192,DATA_DEPTH_B=8192,BYTE_ENABLE=8,BYTE_A=8,BYTE_B=8,IMPLEMENT="32K") in D:/TD/TD_new/arch/eagle_macro.v(141)
+RTL-100 : Current top model is bram
+RAM-300 : Inferred 0 RAMs.
+CMD-004 : start command "optimize_rtl"
+RUN-001 : Open license file D:/TD/TD_new/license/Anlogic.lic
+SNT-300 : SanityCheck: Model "bram"
+FLT-300 : Flatten model bram
+OPT-300 : Optimize round 1
+RTL-100 : 305/0 useful/useless nets, 2/0 useful/useless insts
+MUX-301 : Optimized 0 mux instances.
+OPT-301 : Optimize round 1, 0 better
+CMD-004 : start command "map_macro -nopad"
+GAT-100 : Processed 0 LOGIC_BUF instances.
+GAT-100 : LOGIC BRAM "inst_u0"
+GAT-100 : LOGIC BRAM "inst_u1"
+GAT-100 : LOGIC BRAM "inst_u2"
+GAT-100 : LOGIC BRAM "inst_u3"
+GAT-100 : LOGIC BRAM "inst_u4"
+GAT-100 : LOGIC BRAM "inst_u5"
+GAT-100 : LOGIC BRAM "inst_u6"
+GAT-100 : LOGIC BRAM "inst_u7"
+RTL-100 : Optimize round 1
+RTL-100 : 657/1 useful/useless nets, 242/1 useful/useless insts
+MRG-300 : Merged 42 instances.
+RTL-100 : Optimize round 1, 42 better
+RTL-100 : Optimize round 2
+RTL-100 : 615/1 useful/useless nets, 200/1 useful/useless insts
+RTL-100 : Optimize round 2, 0 better
+RTL-100 : 615/1 useful/useless nets, 200/1 useful/useless insts
+CMD-004 : start command "write_verilog C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_sim.v"
+RTL-100 : write out verilog file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_sim.v

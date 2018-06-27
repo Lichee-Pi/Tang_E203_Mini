@@ -1,0 +1,61 @@
+set_pin_assignment {CLKIN}    { LOCATION = K14;  }	#24MHZ, K14
+set_pin_assignment {ck_rst}  { LOCATION = N3;  } ##R22_N
+
+  ## RGB LEDs, 3 pins
+set_pin_assignment {led0_r} { LOCATION = R3;  }	##LED_R, R3
+set_pin_assignment {led0_g} { LOCATION = J14;  }	##LED_G, J14
+set_pin_assignment {led0_b} { LOCATION = P13;  }	##LED_B, P13
+
+  ## Dedicated QSPI interface 
+set_pin_assignment {qspi_cs} { LOCATION = D3; } 	 ##NAND_CS, D3
+set_pin_assignment {qspi_sck} { LOCATION = H4; } 	 ##NAND_CLK, H4
+set_pin_assignment {qspi_dq[0]} { LOCATION = B3; }  ##NAND_IO0, B3
+set_pin_assignment {qspi_dq[1]} { LOCATION = F4; }  ##NAND_IO1, F4
+set_pin_assignment {qspi_dq[2]} { LOCATION = F5; }  ##NAND_IO2, F5
+set_pin_assignment {qspi_dq[3]} { LOCATION = B1; }  ##NAND_IO3, B1
+
+  ## UART0 (GPIO 16,17)
+set_pin_assignment {uart0_rxd} { LOCATION = A9; }
+set_pin_assignment {uart0_txd} { LOCATION = A10; }
+
+  ## UART1 (GPIO 24,25) (not present on 48-pin)
+set_pin_assignment {uart1_rxd} { LOCATION = B14; }
+set_pin_assignment {uart1_txd} { LOCATION = A14; }
+
+  ## Arduino (aka chipkit shield digital IO pins, 14 is not connected to the
+  ## chip, used for debug.
+set_pin_assignment {ck_io[0]} { LOCATION = R16; } ##
+set_pin_assignment {ck_io[1]} { LOCATION = N12; } ##
+set_pin_assignment {ck_io[2]} { LOCATION = P12; } ##
+set_pin_assignment {ck_io[3]} { LOCATION = N11; } ##
+set_pin_assignment {ck_io[4]} { LOCATION = L10; } ##
+set_pin_assignment {ck_io[5]} { LOCATION = P11; } ##
+set_pin_assignment {ck_io[6]} { LOCATION = M10; } ##
+set_pin_assignment {ck_io[7]} { LOCATION = N9; } ##
+set_pin_assignment {ck_io[8]} { LOCATION = T9; } ##
+set_pin_assignment {ck_io[9]} { LOCATION = R7; } ##
+set_pin_assignment {ck_io[10]} { LOCATION = T7; } ##
+set_pin_assignment {ck_io[11]} { LOCATION = P5; } ##
+set_pin_assignment {ck_io[12]} { LOCATION = N5; } ##
+set_pin_assignment {ck_io[13]} { LOCATION = R2; } ##
+set_pin_assignment {ck_io[14]} { LOCATION = P2; } ##
+set_pin_assignment {ck_io[15]} { LOCATION = F16; } ##
+set_pin_assignment {ck_io[16]} { LOCATION = E16; } ##
+set_pin_assignment {ck_io[17]} { LOCATION = C15; } ##
+set_pin_assignment {ck_io[18]} { LOCATION = C16; } ##
+set_pin_assignment {ck_io[19]} { LOCATION = B16; } ##
+
+  ## Dedicated SPI pins on 6 pin header standard on later arduino models
+  ## connected to SPI2 (on FPGA)
+set_pin_assignment {ck_miso} { LOCATION = B15; } ##
+set_pin_assignment {ck_mosi} { LOCATION = M4; } ##
+set_pin_assignment {ck_ss} { LOCATION = P4; } ##
+set_pin_assignment {ck_sck} { LOCATION = N4; } ##                    
+  
+  ## JD (used for JTAG connection)
+set_pin_assignment {jd_0} { LOCATION = A4; } ##B24_N, A4
+set_pin_assignment {jd_1} { LOCATION = A3; } ##B24_P, A3
+set_pin_assignment {jd_2} { LOCATION = C5; } ##B21_P, C5
+set_pin_assignment {jd_4} { LOCATION = B6; } ##B21_N, B6
+set_pin_assignment {jd_5} { LOCATION = C9; } ##B10_N, C9
+set_pin_assignment {jd_6} { LOCATION = B10; } ##B10_P, B10

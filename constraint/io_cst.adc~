@@ -1,0 +1,89 @@
+set_pin_assignment {CLK25MHZ}    { LOCATION = P1;  }
+set_pin_assignment {ck_rst}  { LOCATION = P4;  } ##KEY1
+
+  ## Green LEDs
+set_pin_assignment {led_0} { LOCATION = T9;  }
+set_pin_assignment {led_1} { LOCATION = R9;  }
+set_pin_assignment {led_2} { LOCATION = T8;  }
+set_pin_assignment {led_3} { LOCATION = T7;  }
+
+  ## RGB LEDs, 3 pins each
+set_pin_assignment {led0_r} { LOCATION = P8;  }
+set_pin_assignment {led0_g} { LOCATION = P9;  }
+set_pin_assignment {led0_b} { LOCATION = N9;  }
+set_pin_assignment {led1_r} { LOCATION = A13; }
+set_pin_assignment {led1_g} { LOCATION = A14; }
+set_pin_assignment {led1_b} { LOCATION = B6 ; }
+set_pin_assignment {led2_r} { LOCATION = A6 ; }
+set_pin_assignment {led2_g} { LOCATION = A7 ; }
+set_pin_assignment {led2_b} { LOCATION = B12; }
+
+set_pin_assignment {seg_cs_o} { LOCATION = B14; }
+
+  ## Sliding switches, 3 used as GPIOs
+  ## sw_3 selects input to UART0
+set_pin_assignment {sw_0} { LOCATION = C4; } ##SW1
+set_pin_assignment {sw_1} { LOCATION = M7; } ##SW2
+set_pin_assignment {sw_2} { LOCATION = P7; } ##SW3
+set_pin_assignment {sw_3} { LOCATION = P6; } ##SW4
+
+  ## Buttons. First 2 used as GPIOs, the last is used as wakeup
+  ##inout wire btn_0,
+set_pin_assignment {btn_1} { LOCATION = N5; } ##KEY1
+set_pin_assignment {btn_2} { LOCATION = P5; } ##KEY2
+set_pin_assignment {btn_3} { LOCATION = T4; } ##KEY3
+
+  ## Dedicated QSPI interface 
+set_pin_assignment {qspi_cs} { LOCATION = T3; } ##SPICSN
+set_pin_assignment {qspi_sck} { LOCATION = R11; } ##CCLK
+set_pin_assignment {qspi_dq[0]} { LOCATION = T10; } ##MOSI
+set_pin_assignment {qspi_dq[1]} { LOCATION = P10; } ##MOSO
+set_pin_assignment {qspi_dq[2]} { LOCATION = T5; } ##WP
+set_pin_assignment {qspi_dq[3]} { LOCATION = T13; } ##HOLD
+
+  ## UART0 (GPIO 16,17)
+set_pin_assignment {uart_rxd_out} { LOCATION =L14 ; } ##GPIO2_9
+set_pin_assignment {uart_txd_in} { LOCATION =M16 ; } ##GPIO2_10
+  
+  ## UART1 (GPIO 24,25) (not present on 48-pin)
+set_pin_assignment {ja_0} { LOCATION =K15 ; } ##GPIO2_29
+set_pin_assignment {ja_1} { LOCATION =L16 ; } ##GPIO2_30
+
+  ## Arduino (aka chipkit shield digital IO pins, 14 is not connected to the
+  ## chip, used for debug.
+set_pin_assignment {ck_io[0]} { LOCATION =M15 ; } ##GPIO2_31
+set_pin_assignment {ck_io[1]} { LOCATION =N16 ; } ##GPIO2_32
+set_pin_assignment {ck_io[2]} { LOCATION =N16 ; } ##GPIO2_33
+set_pin_assignment {ck_io[3]} { LOCATION =N14 ; } ##GPIO2_34
+set_pin_assignment {ck_io[4]} { LOCATION =R15 ; } ##GPIO2_35
+set_pin_assignment {ck_io[5]} { LOCATION =R14 ; } ##GPIO2_36
+set_pin_assignment {ck_io[6]} { LOCATION =G5 ; } ##GPIO1_11
+set_pin_assignment {ck_io[7]} { LOCATION =H5 ; } ##GPIO1_12
+set_pin_assignment {ck_io[8]} { LOCATION =J3 ; } ##GPIO1_13
+set_pin_assignment {ck_io[9]} { LOCATION =K3 ; } ##GPIO1_14
+set_pin_assignment {ck_io[10]} { LOCATION =L3 ; } ##GPIO1_15
+set_pin_assignment {ck_io[11]} { LOCATION =M3 ; } ##GPIO1_16
+set_pin_assignment {ck_io[12]} { LOCATION =N1 ; } ##GPIO1_17
+set_pin_assignment {ck_io[13]} { LOCATION =R1 ; } ##GPIO1_18
+set_pin_assignment {ck_io[14]} { LOCATION =P2 ; } ##GPIO1_19
+set_pin_assignment {ck_io[15]} { LOCATION =H4 ; } ##GPIO1_31
+set_pin_assignment {ck_io[16]} { LOCATION =J1 ; } ##GPIO1_32
+set_pin_assignment {ck_io[17]} { LOCATION =L1 ; } ##GPIO1_33
+set_pin_assignment {ck_io[18]} { LOCATION =M1 ; } ##GPIO1_34
+set_pin_assignment {ck_io[19]} { LOCATION =M2 ; } ##GPIO1_35
+set_pin_assignment {ck_io[20]} { LOCATION =M4 ; } ##GPIO1_36
+
+  ## Dedicated SPI pins on 6 pin header standard on later arduino models
+  ## connected to SPI2 (on FPGA)
+set_pin_assignment {ck_miso} { LOCATION =N4 ; } ##GPIO1_37
+set_pin_assignment {ck_mosi} { LOCATION =N3 ; } ##GPIO1_38
+set_pin_assignment {ck_ss} { LOCATION =R2 ; } ##GPIO1_39
+set_pin_assignment {ck_sck} { LOCATION = ; } ##                      
+  
+  ## JD (used for JTAG connection)
+set_pin_assignment {jd_0} { LOCATION = M13; } ##GPIO2_11
+set_pin_assignment {jd_1} { LOCATION = P16; } ##GPIO2_12
+set_pin_assignment {jd_2} { LOCATION = M14; } ##GPIO2_13
+set_pin_assignment {jd_4} { LOCATION = R16; } ##GPIO2_14
+set_pin_assignment {jd_5} { LOCATION = T15; } ##GPIO2_15
+set_pin_assignment {jd_6} { LOCATION = T14; } ##GPIO2_16

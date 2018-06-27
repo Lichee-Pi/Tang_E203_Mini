@@ -1,0 +1,49 @@
+============================================================
+   Tang Dynasty, V4.0.972
+   Copyright:   Shanghai Anlogic Infotech Co., Ltd.
+                2011 - 2021
+   Executable = D:/TD/TD_new/bin/td.exe
+   Built at =   11:31:39 Jan  8 2018
+   Run by =     DELL
+   Run Date =   Mon Jan 15 18:14:23 2018
+
+   Run on =     DELL-PC
+============================================================
+CMD-004 : start command "import_device eagle_20.db -package BGA256X -basic"
+CMD-004 : start command "read_verilog -file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v"
+VLG-002 : analyze verilog file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v
+VLG-939 WARNING: port beb remains unconnected for this instance in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63)
+VLG-004 : elaborate module bram_32 in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(14)
+VLG-004 : elaborate module EG_LOGIC_BRAM(DATA_WIDTH_A=32,DATA_WIDTH_B=32,ADDR_WIDTH_A=14,ADDR_WIDTH_B=14,DATA_DEPTH_A=16384,DATA_DEPTH_B=16384,BYTE_ENABLE=8,BYTE_A=4,BYTE_B=4,MODE="SP",IMPLEMENT="9K(FAST)") in D:/TD/TD_new/arch/eagle_macro.v(141)
+VIN-1013 WARNING: input port beb[3] is not connected on this instance in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63)
+RTL-100 : Current top model is bram_32
+RAM-300 : Inferred 0 RAMs.
+CMD-004 : start command "optimize_rtl"
+RUN-001 : Open license file D:/TD/TD_new/license/Anlogic.lic
+SNT-300 : SanityCheck: Model "bram_32"
+UDR-200 WARNING: Undriven pin: model "bram_32" / inst "inst" in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63) / pin "beb[3]"
+UDR-200 WARNING: Undriven pin: model "bram_32" / inst "inst" in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63) / pin "beb[2]"
+UDR-200 WARNING: Undriven pin: model "bram_32" / inst "inst" in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63) / pin "beb[1]"
+UDR-200 WARNING: Undriven pin: model "bram_32" / inst "inst" in C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32.v(63) / pin "beb[0]"
+RTL-200 WARNING: Using 0 for all undriven pins and nets
+FLT-300 : Flatten model bram_32
+OPT-300 : Optimize round 1
+RTL-100 : 86/0 useful/useless nets, 2/0 useful/useless insts
+MUX-301 : Optimized 0 mux instances.
+OPT-301 : Optimize round 1, 0 better
+CMD-004 : start command "map_macro -nopad"
+GAT-100 : Processed 0 LOGIC_BUF instances.
+GAT-100 : LOGIC BRAM "inst_u0"
+GAT-100 : LOGIC BRAM "inst_u1"
+GAT-100 : LOGIC BRAM "inst_u2"
+GAT-100 : LOGIC BRAM "inst_u3"
+RTL-100 : Optimize round 1
+RTL-100 : 195/0 useful/useless nets, 143/0 useful/useless insts
+MRG-300 : Merged 31 instances.
+RTL-100 : Optimize round 1, 31 better
+RTL-100 : Optimize round 2
+RTL-100 : 164/0 useful/useless nets, 112/0 useful/useless insts
+RTL-100 : Optimize round 2, 0 better
+RTL-100 : 162/2 useful/useless nets, 110/2 useful/useless insts
+CMD-004 : start command "write_verilog C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32_sim.v"
+RTL-100 : write out verilog file C:/Users/DELL/Desktop/e203egmini_new/project/al_ip/bram_32_sim.v

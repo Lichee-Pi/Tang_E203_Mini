@@ -1,0 +1,37 @@
+============================================================
+   Tang Dynasty, V4.1.033
+   Copyright:   Shanghai Anlogic Infotech Co., Ltd.
+                2011 - 2021
+   Executable = /mnt/xel/work/fpga/rel180112_r4.1.033_RHEL/bin/td
+   Built by =   xel
+   Built at =   14:15, Jan 12
+   Run by =     xel
+   Run Date =   Wed Jun 27 13:54:11 2018
+
+   Run on =     aithinker.com
+============================================================
+CMD-004 : start command "import_device eagle_20.db -package BGA256X -basic"
+CMD-004 : start command "read_verilog -file /mnt/xel/work/fpga/e203mini_new/project/al_ip/pll.v"
+VLG-002 : analyze verilog file /mnt/xel/work/fpga/e203mini_new/project/al_ip/pll.v
+VLG-004 : elaborate module pll in /mnt/xel/work/fpga/e203mini_new/project/al_ip/pll.v(23)
+VLG-004 : elaborate module EG_LOGIC_BUFG in /mnt/xel/work/fpga/rel180112_r4.1.033_RHEL/arch/eagle_macro.v(8)
+VLG-004 : elaborate module EG_PHY_PLL(FIN="24.000",REFCLK_DIV=3,FBCLK_DIV=2,CLKC0_DIV=63,CLKC1_DIV=120,CLKC0_ENABLE="ENABLE",CLKC1_ENABLE="ENABLE",FEEDBK_PATH="CLKC0_EXT",STDBY_ENABLE="DISABLE",CLKC0_CPHASE=63,CLKC1_CPHASE=120,GMC_GAIN=6,ICP_CURRENT=3,KVCO=6,LPF_RESISTOR=2) in /mnt/xel/work/fpga/rel180112_r4.1.033_RHEL/arch/eagle_macro.v(817)
+RTL-100 : Current top model is pll
+RAM-300 : Inferred 0 RAMs.
+CMD-004 : start command "optimize_rtl"
+RUN-001 : Open license file /mnt/xel/work/fpga/rel180112_r4.1.033_RHEL/license/Anlogic.lic
+SNT-300 : SanityCheck: Model "pll"
+FLT-300 : Flatten model pll
+OPT-300 : Optimize round 1
+RTL-100 : 7/0 useful/useless nets, 3/0 useful/useless insts
+MUX-301 : Optimized 0 mux instances.
+OPT-301 : Optimize round 1, 0 better
+CMD-004 : start command "map_macro -nopad"
+GAT-100 : Processed 0 LOGIC_BUF instances.
+GAT-100 : 1 BUFG to GCLK
+RTL-100 : Optimize round 1
+RTL-100 : 7/1 useful/useless nets, 4/1 useful/useless insts
+RTL-100 : Optimize round 1, 0 better
+RTL-100 : 7/1 useful/useless nets, 4/1 useful/useless insts
+CMD-004 : start command "write_verilog /mnt/xel/work/fpga/e203mini_new/project/al_ip/pll_sim.v"
+RTL-100 : write out verilog file /mnt/xel/work/fpga/e203mini_new/project/al_ip/pll_sim.v

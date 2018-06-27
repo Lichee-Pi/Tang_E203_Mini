@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BramConfig>
+    <GeneralConfig>
+        <Type>EG_LOGIC_BRAM</Type>
+        <Device>EG4X20BG256</Device>
+        <create_VHDL>false</create_VHDL>
+        <inst>bram</inst>
+        <debug_enable>NO</debug_enable>
+        <pack_enable>NO</pack_enable>
+        <byte_write>8</byte_write>
+    </GeneralConfig>
+    <ImplementOption>
+        <imp_type>32k</imp_type>
+    </ImplementOption>
+    <MemoryType>
+        <mem_type>DP</mem_type>
+    </MemoryType>
+    <PortAOption>
+        <mode_a>NORMAL</mode_a>
+        <depth_a>8192</depth_a>
+        <width_a>64</width_a>
+        <register_a>None</register_a>
+        <enable_a>enable</enable_a>
+    </PortAOption>
+    <PortBOption>
+        <mode_b>NORMAL</mode_b>
+        <depth_b>8192</depth_b>
+        <width_b>64</width_b>
+        <register_b>None</register_b>
+        <enable_b>enable</enable_b>
+    </PortBOption>
+    <FillMemoryInitValues>
+        <fill_all>NONE</fill_all>
+    </FillMemoryInitValues>
+</BramConfig>
