@@ -2,49 +2,36 @@
 
 module system
 (
-  //input wire CLK100MHZ,
-  input wire CLKIN,//GCLK1-P1
-  input wire ck_rst,//KEY4-P4
-
-  // RGB LEDs, 3 pins each
-  output wire led0_r,//LED6-P8
-  output wire led0_g,//LED7-R9
-  output wire led0_b,//LED8-N9
-
+  input wire CLKIN,//24MHz
+  input wire ck_rst,
+  inout wire awakeup,
+ 
   // Dedicated QSPI interface
   output wire qspi_cs,
   output wire qspi_sck,
   inout wire [3:0] qspi_dq,
 
+  // JD (used for JTAG connection)
+  inout wire jd_0, // TDO
+  //inout wire jd_1, // TRST_n
+  inout wire jd_2, // TCK
+  inout wire jd_4, // TDI
+  inout wire jd_5, // TMS
+  //input wire jd_6, // SRST_n
+
+  // Lichee Tang on board rgb led
+  output wire led0_r,
+  output wire led0_g,
+  output wire led0_b,
+
   // UART0 (GPIO 16,17)
   output wire uart0_txd,
   input wire uart0_rxd,
 
-  // UART1 (GPIO 24,25) (not present on 48-pin)
-  inout wire uart1_rxd,
-  inout wire uart1_txd,
-
   // Arduino (aka chipkit) shield digital IO pins, 14 is not connected to the
   // chip, used for debug.
-  inout wire [19:0] ck_io,
-
-  // Dedicated SPI pins on 6 pin header standard on later arduino models
-  // connected to SPI2 (on FPGA)
-  inout wire ck_miso,
-  inout wire ck_mosi,
-  inout wire ck_ss,
-  inout wire ck_sck,
-
-  // JD (used for JTAG connection)
-  inout wire jd_0,//GPIO2_11-M13 // TDO
-  inout wire jd_1,//GPIO2_12-P16 // TRST_n
-  inout wire jd_2,//GPIO2_13-M14 // TCK
-  inout wire jd_4,//GPIO2_14-R16 // TDI
-  inout wire jd_5,//GPIO2_15-T15 // TMS
-  input wire jd_6 //GPIO2_16-T14 // SRST_n
+  inout wire [31:0] ck_io
 );
-
-  assign seg_cs_o    = 1'b1;
   wire clk_out1;
   wire mmcm_locked;
 
@@ -495,13 +482,65 @@ module system
     .T(~dut_io_pads_gpio_5_o_oe)
   );
   assign dut_io_pads_gpio_5_i_ival = iobuf_gpio_5_o & dut_io_pads_gpio_5_o_ie;
-
+/*
   assign dut_io_pads_gpio_6_i_ival = 1'b0;
 
   assign dut_io_pads_gpio_7_i_ival = 1'b0;
 
   assign dut_io_pads_gpio_8_i_ival = 1'b0;
+*/
 
+  wire iobuf_gpio_6_o;
+  IOBUF
+  //#(
+  //  .DRIVE(12),
+  //  .IBUF_LOW_PWR("TRUE"),
+  //  .IOSTANDARD("DEFAULT"),
+  //  .SLEW("SLOW")
+  //)
+  IOBUF_gpio_6
+  (
+    .O(iobuf_gpio_6_o),
+    .IO(gpio_6),
+    .I(dut_io_pads_gpio_6_o_oval),
+    .T(~dut_io_pads_gpio_6_o_oe)
+  );
+  assign dut_io_pads_gpio_6_i_ival = iobuf_gpio_6_o & dut_io_pads_gpio_6_o_ie;
+
+  wire iobuf_gpio_7_o;
+  IOBUF
+  //#(
+  //  .DRIVE(12),
+  //  .IBUF_LOW_PWR("TRUE"),
+  //  .IOSTANDARD("DEFAULT"),
+  //  .SLEW("SLOW")
+  //)
+  IOBUF_gpio_7
+  (
+    .O(iobuf_gpio_7_o),
+    .IO(gpio_7),
+    .I(dut_io_pads_gpio_7_o_oval),
+    .T(~dut_io_pads_gpio_7_o_oe)
+  );
+  assign dut_io_pads_gpio_7_i_ival = iobuf_gpio_7_o & dut_io_pads_gpio_7_o_ie;
+
+  wire iobuf_gpio_8_o;
+  IOBUF
+  //#(
+  //  .DRIVE(12),
+  //  .IBUF_LOW_PWR("TRUE"),
+  //  .IOSTANDARD("DEFAULT"),
+  //  .SLEW("SLOW")
+  //)
+  IOBUF_gpio_8
+  (
+    .O(iobuf_gpio_8_o),
+    .IO(gpio_8),
+    .I(dut_io_pads_gpio_8_o_oval),
+    .T(~dut_io_pads_gpio_8_o_oe)
+  );
+  assign dut_io_pads_gpio_8_i_ival = iobuf_gpio_8_o & dut_io_pads_gpio_8_o_ie;
+  
   wire iobuf_gpio_9_o;
   IOBUF
   //#(
@@ -640,6 +679,7 @@ module system
   // see below for details
   //assign dut_io_pads_gpio_16_i_ival = sw_3 ? (iobuf_gpio_16_o & dut_io_pads_gpio_16_o_ie) : (uart_txd_in & dut_io_pads_gpio_16_o_ie);
   //Bob: I hacked this, just let it always come from FDTI, and free the sw_3
+  
   assign dut_io_pads_gpio_16_i_ival = (uart0_rxd & dut_io_pads_gpio_16_o_ie);
 
   wire iobuf_gpio_17_o;
@@ -992,90 +1032,53 @@ module system
   // Mimic putting a pullup on this line (part of reset vote).
   //assign SRST_n = jd_6;
   //PULLUP pullup_SRST_n(.O(SRST_n));
-
+  
   //=================================================
-  // Assignment of IOBUF "IO" pins to package pins
+  //GPIO
+  assign ck_io[0] = gpio_0;
+  assign ck_io[1] = gpio_1;
+  assign ck_io[2] = gpio_2;
+  assign ck_io[3] = gpio_3;
+  assign ck_io[4] = gpio_4;
+  assign ck_io[5] = gpio_5;
+  assign ck_io[6] = gpio_6;
+  assign ck_io[7] = gpio_7;
+  assign ck_io[8] = gpio_8;
+  assign ck_io[9] = gpio_9;
+  assign ck_io[10] = gpio_10;
+  assign ck_io[11] = gpio_11; 
+  assign ck_io[12] = gpio_12; 
+  assign ck_io[13] = gpio_13;
+  assign ck_io[14] = gpio_14; 
+  assign ck_io[15] = gpio_15; 
+  assign ck_io[16] = gpio_16; 
+  assign ck_io[17] = gpio_17; 
+  assign ck_io[18] = gpio_18; 
+  assign ck_io[19] = gpio_19; 
+  assign ck_io[20] = gpio_20;
+  assign ck_io[21] = gpio_21;
+  assign ck_io[22] = gpio_22;
+  assign ck_io[23] = gpio_23;
+  assign ck_io[24] = gpio_24;
+  assign ck_io[25] = gpio_25;
+  assign ck_io[26] = gpio_26;
+  assign ck_io[27] = gpio_27;
+  assign ck_io[28] = gpio_28;
+  assign ck_io[29] = gpio_29;
+  assign ck_io[30] = gpio_30;
+  assign ck_io[31] = gpio_31; 
 
-  // Pins IO0-IO13
-  // Shield header row 0: PD0-PD7
-
-  // FTDI UART TX/RX are not connected to ck_io[1,2]
-  // the way they are on Arduino boards.  We copy outgoing
-  // data to both places, switch 3 (sw[3]) determines whether
-  // input to UART comes from FTDI chip or gpio_16 (shield pin PD0)
-
-  assign ck_io[0] = gpio_16; // UART0 RX
-  assign ck_io[1] = gpio_17; // UART0 TX
-  assign ck_io[2] = gpio_18;
-  assign ck_io[3] = gpio_19; // PWM1(1)
-  assign ck_io[4] = gpio_20; // PWM1(0)
-  assign ck_io[5] = gpio_21; // PWM1(2)
-  assign ck_io[6] = gpio_22; // PWM1(3)
-  assign ck_io[7] = gpio_23;
-  // Header row 1: PB0-PB5
-  assign ck_io[8] = gpio_0; // PWM0(0)
-  assign ck_io[9] = gpio_1; // PWM0(1)
-  assign ck_io[10] = gpio_2; // SPI1 CS(0) / PWM0(2)
-  assign ck_io[11] = gpio_3; // SPI1 MOSI / PWM0(3)
-  assign ck_io[12] = gpio_4; // SPI1 MISO
-  assign ck_io[13] = gpio_5; // SPI1 SCK
-
-  // Header row 3: A0-A5 (we don't support using them as analog inputs)
-  // just treat them as regular digital GPIOs
-  assign ck_io[14] = uart0_rxd; //gpio_9;  // A0 = <unconnected> CS(1)
-  assign ck_io[15] = gpio_9; // A1 = CS(2)
-  assign ck_io[16] = gpio_10; // A2 = CS(3) / PWM2(0)
-  assign ck_io[17] = gpio_11; // A3 = PWM2(1)
-  assign ck_io[18] = gpio_12; // A4 = PWM2(2) / SDA
-  assign ck_io[19] = gpio_13; // A5 = PWM2(3) / SCL
-  // Mirror outputs of GPIOs with PWM peripherals to RGB LEDs on Arty
-  // assign RGB LED0 R,G,B inputs = PWM0(1,2,3) when iof_1 is active
-  //in lichee tang ,we only have one rgbled
+ 
   assign led0_r = dut_io_pads_gpio_1_o_oval & dut_io_pads_gpio_1_o_oe;
   assign led0_g = dut_io_pads_gpio_2_o_oval & dut_io_pads_gpio_2_o_oe;
   assign led0_b = dut_io_pads_gpio_3_o_oval & dut_io_pads_gpio_3_o_oe;
-  
-  // Note that this is the one which is actually connected on the HiFive/Crazy88
-  // Board. Same with RGB LED1 R,G,B inputs = PWM1(1,2,3) when iof_1 is active
-  //assign led1_r = dut_io_pads_gpio_19_o_oval & dut_io_pads_gpio_19_o_oe;
-  //assign led1_g = dut_io_pads_gpio_21_o_oval & dut_io_pads_gpio_21_o_oe;
-  //assign led1_b = dut_io_pads_gpio_22_o_oval & dut_io_pads_gpio_22_o_oe;
-  // and RGB LED2 R,G,B inputs = PWM2(1,2,3) when iof_1 is active
-  //assign led2_r = dut_io_pads_gpio_11_o_oval & dut_io_pads_gpio_11_o_oe;
-  //assign led2_g = dut_io_pads_gpio_12_o_oval & dut_io_pads_gpio_12_o_oe;
-  //assign led2_b = dut_io_pads_gpio_13_o_oval & dut_io_pads_gpio_13_o_oe;
-
-  // Only 19 out of 20 shield pins connected to GPIO pads
-  // Shield pin A5 (pin 14) left unconnected
-  // The buttons are connected to some extra GPIO pads not connected on the
-  // HiFive1 board
-
-  // UART1 RX/TX pins are assigned to PMOD_D connector pins 0/1
-  assign uart1_txd = gpio_25; // UART1 TX
-  assign uart1_rxd = gpio_24; // UART1 RX
-
-  // SPI2 pins mapped to 6 pin ICSP connector (standard on later arduinos)
-  // These are connected to some extra GPIO pads not connected on the HiFive1
-  // board
-  assign ck_ss = gpio_26;
-  assign ck_mosi = gpio_27;
-  assign ck_miso = gpio_28;
-  assign ck_sck = gpio_29;
-  
-  // in lichee tang we don't have them
-  // Use the LEDs for some more useful debugging things.
-  //assign led_0 = dut_io_pads_aon_pmu_vddpaden_o_oval;  //LD4
-  //assign led_1 = dut_io_pads_aon_pmu_padrst_o_oval;		//LD5
-  //assign led_2 = dut_io_pads_aon_pmu_dwakeup_n_i_ival;
-  //assign led_3 = gpio_14;
-
+ 
   // model select
-  //all set to 1 or 0
-  //assign sw_0 = dut_io_pads_bootrom_n_i_ival;   //
-  //assign sw_1 = dut_io_pads_dbgmode0_n_i_ival;
-  //assign sw_2 = dut_io_pads_dbgmode1_n_i_ival;
-  //assign sw_3 = dut_io_pads_dbgmode2_n_i_ival;
-
+  //all set to 1
+  assign dut_io_pads_bootrom_n_i_ival = 1'b1;
+  assign dut_io_pads_dbgmode0_n_i_ival = 1'b1;
+  assign dut_io_pads_dbgmode1_n_i_ival = 1'b1;
+  assign dut_io_pads_dbgmode2_n_i_ival = 1'b1;
 
   e203_soc_top dut
   (
@@ -1324,8 +1327,8 @@ module system
   );
 
   // Assign reasonable values to otherwise unconnected inputs to chip top
+  wire iobuf_dwakeup_i;
 
-  wire iobuf_dwakeup_o;
   IOBUF
   //#(
   //  .DRIVE(12),
@@ -1336,7 +1339,7 @@ module system
   IOBUF_dwakeup_n
   (
     .O(iobuf_dwakeup_o),
-    .IO(),	//OR 1'B0
+    .IO(awakeup),	//OR 1'B0
     .I(1'b1),
     .T(1'b1)
   );

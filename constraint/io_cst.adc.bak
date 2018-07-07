@@ -25,24 +25,19 @@ set_pin_assignment {jd_2} { LOCATION = C5; }	 ##TCK, B21_P, C5
 set_pin_assignment {jd_4} { LOCATION = B6; } 	##TDI, B21_N, B6
 set_pin_assignment {jd_5} { LOCATION = C9; } 	##TMS, B10_N, C9
 ###set_pin_assignment {jd_6} { LOCATION = ; } 	##SRST_n, ##unused
- ##B25P, D5
-set_pin_assignment {ck_rst} { LOCATION = K16; } ##user_key
-set_pin_assignment {awakeup} { LOCATION = D6; }	##B25_N, D6
+ 
+set_pin_assignment {ck_rst} { LOCATION = A3; } ##B24_P, A3
+set_pin_assignment {awakeup} { LOCATION = B10; }##B10_P, B10
 
   ##===========================================
   ##GPIO
-set_pin_assignment {ck_io[0]} { LOCATION = A3; }  		##B24_P, A3
-##GPIO1, GPIO2, GPIO3 is same as rgb led
-##so set them in half-pad
-set_pin_assignment {ck_io[1]} { LOCATION = N3; }  		##R22_N, N3
-set_pin_assignment {ck_io[2]} { LOCATION = M4; } 		##R22_P, M4
-set_pin_assignment {ck_io[3]} { LOCATION = P4; } 		##R23_P, P4
-##
-set_pin_assignment {ck_io[4]} { LOCATION = B10; }  	##B10_P, B10
-set_pin_assignment {ck_io[5]} { LOCATION = A9; } 		##B11_N, A9
-set_pin_assignment {ck_io[6]} { LOCATION = A10; } 		##B11_P, A10
-set_pin_assignment {ck_io[7]} { LOCATION = B14; } 		##B14_P, B14
-set_pin_assignment {ck_io[8]} { LOCATION = A14; } 		##B14_N, A14
+set_pin_assignment {ck_io[0]} { LOCATION = N3; }  		###R22_N, N3
+set_pin_assignment {ck_io[1]} { LOCATION = M4; }  		###R22_P, M4
+set_pin_assignment {ck_io[2]} { LOCATION = A9; } 		##B11_N, A9
+set_pin_assignment {ck_io[3]} { LOCATION = A10; } 		##B11_P, A10
+set_pin_assignment {ck_io[4]} { LOCATION = B14; } 		##B14_P, B14
+set_pin_assignment {ck_io[5]} { LOCATION = A14; } 		##B14_N, A14
+###GPIO6,GPIO7,GPIO8 is not support
 set_pin_assignment {ck_io[9]} { LOCATION = B15; } 		##B15_P, B15
 set_pin_assignment {ck_io[10]} { LOCATION = B16; } 	##B15_N, B16
 set_pin_assignment {ck_io[11]} { LOCATION = C16; } 	##B13_P, C16
@@ -65,5 +60,5 @@ set_pin_assignment {ck_io[27]} { LOCATION = P5; } 		##T3_N, P5
 set_pin_assignment {ck_io[28]} { LOCATION = N5; } 		##T3_P, N5
 set_pin_assignment {ck_io[29]} { LOCATION = R2; } 		##R19_P, R2
 set_pin_assignment {ck_io[30]} { LOCATION = P2; } 		##R19_N, P2
-###below gpio is in half-pad
+###below four gpios is in half-pad
 set_pin_assignment {ck_io[31]} { LOCATION = N4; } 		##R23_N, N4
