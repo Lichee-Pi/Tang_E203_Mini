@@ -25,8 +25,8 @@ module system
   output wire led0_b,
 
   // UART0 (GPIO 16,17)
-  output wire uart0_txd,
-  input wire uart0_rxd,
+//  output wire uart0_txd,
+//  input wire uart0_rxd,
 
   // Arduino (aka chipkit) shield digital IO pins, 14 is not connected to the
   // chip, used for debug.
@@ -680,7 +680,9 @@ module system
   //assign dut_io_pads_gpio_16_i_ival = sw_3 ? (iobuf_gpio_16_o & dut_io_pads_gpio_16_o_ie) : (uart_txd_in & dut_io_pads_gpio_16_o_ie);
   //Bob: I hacked this, just let it always come from FDTI, and free the sw_3
   
-  assign dut_io_pads_gpio_16_i_ival = (uart0_rxd & dut_io_pads_gpio_16_o_ie);
+  //assign dut_io_pads_gpio_16_i_ival = (uart0_rxd & dut_io_pads_gpio_16_o_ie);
+  
+  assign dut_io_pads_gpio_16_i_ival = (iobuf_gpio_16_o & dut_io_pads_gpio_16_o_ie);
 
   wire iobuf_gpio_17_o;
   IOBUF
@@ -698,7 +700,7 @@ module system
     .T(~dut_io_pads_gpio_17_o_oe)
   );
   assign dut_io_pads_gpio_17_i_ival = iobuf_gpio_17_o & dut_io_pads_gpio_17_o_ie;
-  assign uart0_txd = (dut_io_pads_gpio_17_o_oval & dut_io_pads_gpio_17_o_oe);
+//  assign uart0_txd = (dut_io_pads_gpio_17_o_oval & dut_io_pads_gpio_17_o_oe);
 
   wire iobuf_gpio_18_o;
   IOBUF
