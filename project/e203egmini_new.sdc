@@ -4,8 +4,10 @@
 
 #Created Clock
 #create_clock -name CLK25MHZ -period 40 -period 40 -waveform {0 20} [get_ports {CLK25MHZ}]
+
 create_clock -name clk_8388 -period 119.218 [get_nets {clk_8388}]
-create_clock -name clk_16M -period 62.5 [get_nets {clk_16M}]
+create_clock -name clk_16M -period 62.5 [get_nets {CLKIN}]
+
 create_generated_clock -name slowclk -source [get_nets {clk_8388}] -master_clock clk_8388 -divide_by 256 [get_nets {slowclk}]
 set_false_path  -from [get_clocks "clk_16M"] -to [get_clocks "slowclk"]
 set_false_path  -from [get_clocks "slowclk"] -to [get_clocks "clk_16M"]
